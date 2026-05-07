@@ -3,14 +3,16 @@ package main
 import (
 	"database/sql"
 	"embed"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/cors"
-	"github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+	"time"
+
+	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
+	"github.com/joho/godotenv"
 
 	"github.com/bootdotdev/learn-cicd-starter/internal/database"
 
@@ -96,7 +98,7 @@ func main() {
 	srv := &http.Server{
 		Addr:              ":" + port,
 		Handler:           router,
-		ReadHeaderTimeout: 600,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	log.Printf("Serving on port: %d\n", port_number)
